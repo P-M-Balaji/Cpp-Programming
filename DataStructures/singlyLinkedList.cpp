@@ -23,13 +23,29 @@ void push(Node **head_ref, int n)
 void append(Node **head_ref, int n)
 {
     Node *temp = *head_ref;
-    while (temp->next != NULL)
-        temp = temp->next;
     Node *newnode = new Node();
     newnode->data = n;
     newnode->next = NULL;
-    temp->next = newnode;
+    if (*head_ref == NULL)
+        *head_ref = newnode;
+    else{
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = newnode;
+    }
     size_++;
+}
+
+void create(Node **head_ref)
+{
+    int n, l;
+    cout<<"Enter the number of elements:";
+    cin >> n;
+    cout << "Enter the elements:";
+    while (n--){
+        cin >> l;
+        append(head_ref, l);
+    }
 }
 
 // Insert at a specific position
@@ -215,12 +231,13 @@ void display(Node *node)
 int main()
 {
     Node *head = NULL;
+    create(&head);
+    append(&head,22);
     insert(&head, 8, 4);
     push(&head, 5);
     push(&head, 4);
     deleteNode(&head, 2);
     append(&head, 6);
-    insert(&head, 8, 4);
     display(head);
     size(head);
     deleteNode(&head, 4);
