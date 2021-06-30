@@ -176,6 +176,18 @@ void getMin(Node *node)
     cout << min << endl;
 }
 
+int getMiddle(Node *head_node)
+{
+    Node *slow = head_node;
+    Node *fast = head_node;
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow->data;
+}
+
 void isSorted(Node *node)
 {
     if (node->next == NULL || node->next->next == NULL)
